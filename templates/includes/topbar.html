@@ -4,9 +4,23 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-7">
                 <div class="list-inline">
-                    <a href="tel:+55-4XX-634-7071"><i class="fa fa-phone"></i>+55-4XX-634-7071</a>
-                    <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
-                    <a href="tel:info@themevessel.com"><i class="fa fa-clock-o"></i>Mon - Sun: 8:00am - 6:00pm</a>
+                    <a href="Student ID: x21171203"><i ></i>Student ID: x21171203</a>
+                    <a href="x21171203@student.ncirl.ie"><i class="fa fa-envelope"></i>x21171203@student.ncirl.ie</a>
+                    <a href="x21171203@student.ncirl.ie"><i ></i>National College Of Ireland</a>
+                    <a href="x21171203@student.ncirl.ie"><i class="fa fa-clock-o" style="color:white;"></i> <span id="hours" style="color:white;"></span></a>
+                    <script>
+                        var d = new Date();
+                        var hours = d.getHours();
+                        var minutes = d.getMinutes();
+                        // add leading zeros to minutes
+                        if (minutes < 10) {
+                            minutes = "0" + minutes;
+                        }
+                        // format the time as HH:mm
+                        var time = hours + ":" + minutes;
+                        // display the time in the HTML
+                        document.getElementById("hours").innerHTML = time;
+                    </script>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5">
