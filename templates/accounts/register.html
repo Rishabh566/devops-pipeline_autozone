@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %} | Register {% endblock %}
+
 {% block content %}
 {% load static %}
 
@@ -28,6 +30,8 @@
                         </a>
                     </div>
                     <h3>CREATE ACCOUNT</h3>
+
+                    {% include 'includes/messages.html' %}
                     <form action="{% url 'register' %}" method="POST">
                     	{% csrf_token %}   
                         <div class="form-group form-box">
@@ -58,12 +62,10 @@
                             <button type="submit" class="btn-md btn-theme float-left">Register</button>
                         </div>
                         <div class="extra-login clearfix">
-                            <span>Or Login With</span>
+                            <span></span>
                         </div>
                         <div class="clearfix"></div>
                         <ul class="social-list">
-                            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
-                            <li><a href="#" class="google-bg"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
                         </ul>
                     </form>
                     <p>Already a member? <a href="{% url 'login' %}" class="thembo"> Login here</a></p>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %} | Login {% endblock %}
 {% block content %}
 
 {% load static %}
@@ -29,10 +29,11 @@
                         </a>
                     </div>
                     <h3>LOGIN BELOW</h3>
-                    <form action="{% URL 'login' %}" method="POST">
+                    {% include 'includes/messages.html' %}
+                    <form action="{% url 'login' %}" method="POST">
                     	{% csrf_token %} 
                         <div class="form-group form-box">
-                            <input type="email" name="email" class="input-text" placeholder="Email Address" required>
+                            <input type="text" name="username" class="input-text" placeholder="username" required>
                             <i class="flaticon-mail"></i>
                         </div>
                         <div class="form-group form-box">
@@ -43,12 +44,10 @@
                             <button type="submit" class="btn-md btn-theme float-left">Login</button>
                         </div>
                         <div class="extra-login clearfix">
-                            <span>Or Login With</span>
+                            <span></span>
                         </div>
                         <div class="clearfix"></div>
                         <ul class="social-list">
-                            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
-                            <li><a href="#" class="google-bg"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
                         </ul>
                     </form>
                     <p>Don't have an account? <a href="{% url 'register' %}" class="thembo"> Register here</a></p>

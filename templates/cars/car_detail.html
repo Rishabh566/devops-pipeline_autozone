@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block title %} | {{single_car.car_title}} {% endblock %}
 
+{% block content %}
+{% load static %}
 {% load humanize %}
 
 <!-- Sub banner start -->
@@ -26,6 +28,7 @@
                 <div class="car-details-section">
                     <!-- Heading start -->
                     <div class="heading-car clearfix">
+                        {% include 'includes/messages.html' %}
                         <div class="pull-left">
                             <h3>{{single_car.car_title}}</h3>
                             <h6>
@@ -221,13 +224,21 @@
                         <div class="modal-content">
                           <div class="contact-dealer modal-header">
                             <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
-                            <img src="img/logos/logo-black-white.png">
+                            <center><img src="{% static 'img/logos/logo-black-white.png' %}"></center>
                             <button type="button" class="close" data-dismiss="modal">
                               <span>&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                            <form action="#">
+                            <form action="{% url 'inquiry' %}" method="POST">
+                              {% csrf_token %}
+                              {% if user.is_authenticated %}
+                                <input type="hidden" name="user_id" value="{{user.id}}">
+                              {% else %}
+                                <input type="hidden" name="user_id" value="0">
+                              {% endif %}
+                                <input type="hidden" name="car_id" value="{{single_car.id}}">
+
                                 <div class="form-group">
                                   <label for="name" class="col-form-label">Hello, My Name is</label>
                                   <div class="row">
@@ -240,16 +251,16 @@
                                   </div>
                                 </div>
                                   <div class="form-group">
-                                      <select class="form-control" id="sel1" name="customer_need">
+                                      <select class="form-control" id="sel1" name="customer_needs">
                                         <option value="I'm interested in this">I'm interested in this</option>
                                         <option value="I'd like to know your best price for this">I'd like to know your best price for this</option>
                                         <option value="I'd like to test drive this">I'd like to test drive this</option>
-                                        <option value="I'd like a history report for this">I'd like a history report for this</option>
+                                        <option value="I'd like past records for this">I'd like past records for this</option>
                                       </select>
                                     </div>
                                 
                                 <div class="form-group">
-                                  <input type="text" name="car_title" class="form-control" value="LAMBORGHINI HURACÁN." readonly>
+                                  <input type="text" name="car_title" class="form-control" value="{{single_car.car_title}}" readonly>
                                 </div>
                                
                                 <div class="form-group">
@@ -259,7 +270,7 @@
                                       <input type="text" name="city" class="form-control" placeholder="City" required>
                                     </div>
                                     <div class="col">
-                                      <input type="text" name="state" class="form-control" placeholder="State" required>
+                                      <input type="text" name="country" class="form-control" placeholder="Country" required>
                                     </div>
                                   </div>
                                 </div>
@@ -287,30 +298,6 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- Question start -->
-                    <div class="widget question">
-                        <h5 class="sidebar-title">Get a Question?</h5>
-                        <ul class="contact-info">
-                            <li>
-                                <i class="flaticon-pin"></i>20/F Green Road, Dhanmondi
-                            </li>
-                            <li>
-                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">info@themevessel.com</a>
-                            </li>
-                            <li>
-                                <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+0477 85x6 552</a>
-                            </li>
-                        </ul>
-                        <div class="social-list clearfix">
-                            <ul>
-                                <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-                                <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
                     </div>
                     
                 </div>
