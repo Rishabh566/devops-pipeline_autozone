@@ -171,3 +171,12 @@ MESSAGE_TAGS = {
 }
 
 SITE_ID = 1
+
+# Email Settings
+# https://docs.djangoproject.com/en/4.2/topics/email/#:~:text=function%20in%20django.-,core.,backend%20that%20you%20can%20use.&text=By%20default%2C%20a%20call%20to,that%20backend%20will%20be%20instantiated.
+
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'x21171203@student.ncirl.ie'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
