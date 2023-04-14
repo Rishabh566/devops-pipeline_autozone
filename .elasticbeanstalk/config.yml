@@ -1,9 +1,9 @@
 branch-defaults:
   main:
-    environment: x21171203-devsecops-autozone-ebs-env
+    environment: x21171203-devsecops-autozone-ebs-app-env
     group_suffix: null
 global:
-  application_name: x21171203-devsecops-autozone-ebs-application
+  application_name: x21171203-devsecops-autozone-ebs-app
   branch: null
   default_ec2_keyname: x21171203-devsecops-autozone-kp
   default_platform: Python 3.7
@@ -12,7 +12,7 @@ global:
   instance_profile: null
   platform_name: null
   platform_version: null
-  profile: MSCCLOUD-250738637992
+  profile: profile1
   repository: null
   sc: git
   workspace_type: Application
