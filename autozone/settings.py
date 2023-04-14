@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'iyxp1=+kh*)i!wu9p2sq581(c3gl=2k9(ooh_9^7c$6td-m+r2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
  #'x21171203-devsecops-autozone-ebs-env.eba-capdztwy.eu-west-2.elasticbeanstalk.com',"*"
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'autozone.urls'
@@ -90,20 +92,22 @@ WSGI_APPLICATION = 'autozone.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'citus',
-        'USER': 'citus',
-        'PASSWORD': 'Wind0wsazure',
-        'HOST': 'c.x21171203-postgres-db.postgres.database.azure.com',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-            'options': '-c timezone=UTC',
-            },
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'citus',
+#        'USER': 'citus',
+#        'PASSWORD': 'Wind0wsazure',
+#        'HOST': 'c.x21171203-postgres-db.postgres.database.azure.com',
+#        'PORT': '5432',
+#        'OPTIONS': {
+#            'sslmode': 'require',
+#            'options': '-c timezone=UTC',
+#            },
+#    }
+#}
+
+DATABASES = {'default': dj_database_url.config(default='postgres://citus:Wind0wsazure@c.x21171203-postgres-db.postgres.database.azure.com/citus')}
 
 
 # Password validation
@@ -180,3 +184,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'x21171203@student.ncirl.ie'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
+
+#whitenoise settings
+
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
