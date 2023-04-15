@@ -41,9 +41,6 @@ phases:
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
       - python manage.py loaddata project_dump.json
-      - sudo apt-get install ufw
-      - sudo iptables -L
-      - sudo ufw status
       - sudo service postgresql status
       - ls -la
   post_build:
