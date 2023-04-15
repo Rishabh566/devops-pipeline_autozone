@@ -41,6 +41,7 @@ phases:
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
       - python manage.py loaddata project_dump.json
+      - pwd
 artifacts:
   files:
     - '**/*'
