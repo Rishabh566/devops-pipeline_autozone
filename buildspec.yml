@@ -46,5 +46,5 @@ phases:
       - ls -la
 artifacts:
   files:
-    - '**/*'
-  name: my-django-app
+    - '*/'
+
