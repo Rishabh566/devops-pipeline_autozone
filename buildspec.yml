@@ -42,10 +42,15 @@ phases:
       - python manage.py collectstatic --noinput
       - python manage.py loaddata project_dump.json
       - sudo apt-get install ufw
+      - sudo iptables -L
       - sudo ufw status
       - sudo service postgresql status
       - ls -la
-artifacts:
-  files:
-    - '*/'
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+  artifacts:
+    files:
+      - '**/*'
 
