@@ -16,7 +16,7 @@ phases:
   build:
     commands:
       - echo "Running Django migrations"
-      - python manage.py migrate
+      - python manage.py migrate --traceback
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
 artifacts:
