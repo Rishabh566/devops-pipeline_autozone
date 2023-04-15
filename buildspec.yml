@@ -22,10 +22,10 @@ phases:
        # Delete and recreate the 'postgres' user with password 'postgres'
       - |
           if sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='postgres'" | grep -q 1; then
-          sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+            sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+          else
+            sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
           fi
-          sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
-
       # Create the 'citus' database if it doesn't exist
       - |
           if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='citus'" | grep -q 1; then
