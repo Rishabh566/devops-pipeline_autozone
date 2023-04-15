@@ -43,6 +43,3 @@ virtualenv==20.21.0
 virtualenv-clone==0.5.7
 wcwidth==0.1.9
 whitenoise==5.1.0
-urllib3
-chardet
-charset-normalizer
