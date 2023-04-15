@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'autozone.wsgi.application'
 #    }
 #}
 
-DATABASES = {'default': dj_database_url.config(default='postgres://citus:Wind0wsazure@c.x21171203-postgres-db.postgres.database.azure.com/citus')}
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres:postgres@localhost/citus')}
 
 
 # Password validation
