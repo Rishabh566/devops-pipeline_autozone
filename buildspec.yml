@@ -44,7 +44,6 @@ phases:
       - python manage.py loaddata project_dump.json
       - pwd
       - ls -la
-      - python manage.py runserver
 artifacts:
   files:
     - '**/*'
