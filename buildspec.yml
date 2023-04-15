@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.8.2
+      python: 3.10.11
     commands:
       - echo "Installing dependencies"
       - pip install --verbose -r requirements.txt
