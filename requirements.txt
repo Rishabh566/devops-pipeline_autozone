@@ -1,6 +1,4 @@
 asgiref==3.6.0
-awsebcli==3.20.5
-botocore==1.29.81
 cement==2.8.2
 certifi==2022.12.7
 cffi==1.15.1
