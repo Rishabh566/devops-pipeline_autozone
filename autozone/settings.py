@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'autozone.wsgi.application'
 #    }
 #}
 
-DATABASES = {'default': dj_database_url.config(default='postgres://postgres:postgres@localhost/citus')}
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres:postgres@citus.cxqospjboyrv.eu-west-2.rds.amazonaws.com/citus')}
 
 
 # Password validation
