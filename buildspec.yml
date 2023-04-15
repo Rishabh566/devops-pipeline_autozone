@@ -17,7 +17,7 @@ phases:
       - echo "Configuring PostgreSQL"
       - sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/14/main/postgresql.conf
       - echo "host    all             all             0.0.0.0/0               md5" | sudo tee -a /etc/postgresql/14/main/pg_hba.conf
-      - sudo systemctl restart postgresql
+      - sudo service postgresql restart
       - sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
       - sudo -u postgres createdb citus --owner=postgres
   build:
