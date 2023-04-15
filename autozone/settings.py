@@ -92,22 +92,22 @@ WSGI_APPLICATION = 'autozone.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'citus',
-#        'USER': 'citus',
-#        'PASSWORD': 'Wind0wsazure',
-#        'HOST': 'c.x21171203-postgres-db.postgres.database.azure.com',
-#        'PORT': '5432',
-#        'OPTIONS': {
-#            'sslmode': 'require',
-#            'options': '-c timezone=UTC',
-#            },
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'citus',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'autozonedb.cxqospjboyrv.eu-west-2.rds.amazonaws.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+            'options': '-c timezone=UTC',
+            },
+    }
+}
 
-DATABASES = {'default': dj_database_url.config(default='postgres://postgres:postgres@citus.cxqospjboyrv.eu-west-2.rds.amazonaws.com/citus')}
+#DATABASES = {'default': dj_database_url.config(default='postgres://postgres:postgres@citus.cxqospjboyrv.eu-west-2.rds.amazonaws.com/citus')}
 
 
 # Password validation
