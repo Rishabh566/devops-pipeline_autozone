@@ -3,9 +3,7 @@ phases:
   install: 
     commands:
            - pip install --upgrade pip
-           - source env/Scripts/activate
            - pip install -r requirements.txt
-           - pip manage.py loaddata project_dump.json
     pre_build:
         commands:
            - python --version
