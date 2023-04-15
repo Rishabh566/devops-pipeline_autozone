@@ -10,22 +10,37 @@ phases:
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check 
       - pip install -r requirements.txt
-
-      - echo "Installing PostgreSQL"
-      - apt-get update
-      - apt-get install -y postgresql postgresql-contrib
-      - echo "Configuring PostgreSQL"
-      - sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/14/main/postgresql.conf
-      - echo "host    all             all             0.0.0.0/0               md5" | sudo tee -a /etc/postgresql/14/main/pg_hba.conf
-      - sudo service postgresql restart
       - |
-        if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='postgres'" | grep -q 1; then
-            sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
+        if ! command -v psql &> /dev/null; then
+            echo "Installing PostgreSQL"
+            apt-get update
+            apt-get install -y postgresql postgresql-contrib
+            echo "Configuring PostgreSQL"
+            sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/14/main/postgresql.conf
+            echo "host    all             all             0.0.0.0/0               md5" | sudo tee -a /etc/postgresql/14/main/pg_hba.conf
+            sudo service postgresql restart
             sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
             sudo -u postgres createdb citus --owner=postgres
         else
-            echo "User 'postgres' already exists. Skipping user creation."
+            echo "PostgreSQL is already installed. Skipping installation."
         fi
+     # - echo "Installing PostgreSQL"
+     # - apt-get update
+     # - apt-get install -y postgresql postgresql-contrib
+     #- echo "Configuring PostgreSQL"
+     # - sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/14/main/postgresql.conf
+     # - echo "host    all             all             0.0.0.0/0               md5" | sudo tee -a /etc/postgresql/14/main/pg_hba.conf
+     # - sudo service postgresql restart
+      #- |
+      #  if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='postgres'" | grep -q 1; then
+       #     sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
+        #    sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
+         #   sudo -u postgres createdb citus --owner=postgres
+        #else
+         #   echo "User 'postgres' already exists. Skipping user creation."
+        #fi
+
+
   build:
     commands:
       - echo "Running Django migrations"
