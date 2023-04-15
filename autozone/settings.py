@@ -27,7 +27,7 @@ SECRET_KEY = 'iyxp1=+kh*)i!wu9p2sq581(c3gl=2k9(ooh_9^7c$6td-m+r2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['x21171203-devsecops-autozone-ebs-env.eba-capdztwy.eu-west-2.elasticbeanstalk.com', '*']
+ALLOWED_HOSTS = ['http://x21171203devsecopsebsapp-env.eba-ew7m88y2.eu-west-2.elasticbeanstalk.com', '*']
  #'x21171203-devsecops-autozone-ebs-env.eba-capdztwy.eu-west-2.elasticbeanstalk.com',"*"
 
 # Application definition

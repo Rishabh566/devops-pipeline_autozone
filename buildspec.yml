@@ -40,9 +40,7 @@ phases:
       - python manage.py migrate --traceback
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
-      - pip show requests
       - python manage.py loaddata project_dump.json
-      - pwd
       - ls -la
 artifacts:
   files:
