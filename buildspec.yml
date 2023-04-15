@@ -9,8 +9,15 @@ phases:
       - python3 -m venv env
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check 
-      - pip install -r requirements.txt
-
+      - |
+          while read requirement; do
+              if pip freeze | grep -q $requirement; then
+                  echo "Requirement $requirement already satisfied, skipping installation"
+              else
+                  pip install $requirement
+              fi
+          done < requirements.txt
+          
       - echo "Installing PostgreSQL"
       - apt-get update
       - apt-get install -y postgresql postgresql-contrib
