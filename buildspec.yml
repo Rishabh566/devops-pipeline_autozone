@@ -10,7 +10,7 @@ phases:
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check 
       - pip install -r requirements.txt
-  static-code-analysis:
+  pre_build:
     commands:
       - echo "Running Pylint static code analysis"
       - pylint --output-format=json *.py > pylint_report.json
