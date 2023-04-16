@@ -11,12 +11,17 @@ phases:
       - pip install --upgrade pip --disable-pip-version-check 
       - pip install pylint==2.11.1
       - pip install pylint-json2html==0.4.0
-      - pip install -r requirements.txt
+      #- pip install -r requirements.txt
       - sudo apt-get install jq
       - sudo apt-get update
       #- sudo apt-get install -y bsdmainutils
       - pip install tabulate
-  
+      - echo "Installing sonar-scanner"
+      - sudo apt-get install openjdk-11-jdk
+      - export PATH=/opt/sonar-scanner/bin:$PATH
+      - source ~/.bashrc
+      - sonar-scanner -v
+
   pre_build:
     commands:
       - echo "Running Pylint static code analysis"
@@ -29,6 +34,13 @@ phases:
       - echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD LOGS FOR STATIC CODE ANALYSIS'
       #- aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html --debug
       # $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py
+      - echo "SONARCLOUD CODE SECURITY ANALYSIS RUNNING"
+      - sonar-scanner \
+        -Dsonar.organization=x21171203-devsecops-code-security \
+        -Dsonar.projectKey=DEVSECOPS \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=58b79b8d686b4ac8fda3114ffe6f49934070a3ac
     
   build:
     commands:
