@@ -36,13 +36,7 @@ phases:
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
       - pwd
       - export PATH=$PATH:/codebuild/output/src172087046/src/sonar-scanner-3.3.0.1492-linux/bin/
-      - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner \
-        -Dsonar.login=${sonartoken}
-        -Dsonar.organization=x21171203-devsecops-code-security \
-        -Dsonar.projectName=x21171203-devsecops-code_security \
-        -Dsonar.sources=. \
-        -Dsonar.host.url=https://sonarcloud.io \
-        
+      - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner -Dsonar.login=${sonartoken} -Dsonar.organization=x21171203-devsecops-code-security -Dsonar.projectName=x21171203-devsecops-code_security -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io Dsonar.projectKey=devsecops -DgeneratePom=true
       - sleep 5
 
   build:
