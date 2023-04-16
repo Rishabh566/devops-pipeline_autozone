@@ -4,7 +4,6 @@ phases:
   install:
     runtime-versions:
       python: 3.10
-      java: openjdk8
     commands:
       - echo "Installing dependencies"
       - python3 -m venv env
