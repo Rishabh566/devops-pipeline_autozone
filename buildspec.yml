@@ -28,7 +28,6 @@ phases:
       #- cat pylint_report.json | jq
       - echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD LOGS FOR STATIC CODE ANALYSIS'
       #- aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html --debug
-    
   build:
     commands:
       - echo "Running Django migrations"
