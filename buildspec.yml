@@ -14,7 +14,8 @@ phases:
       #- pip install -r requirements.txt
       - sudo apt-get install jq
       - sudo apt-get update
-      - sudo apt-get install -y bsdmainutils
+      #- sudo apt-get install -y bsdmainutils
+      - pip install tabulate
   
   pre_build:
     commands:
@@ -23,7 +24,8 @@ phases:
       - pylint --output-format=json --fail-under=0 $CODEBUILD_SRC_DIR/contacts/*.py $CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py > pylint_report.json || true
      # - pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
-      - cat pylint_report.json | jq -r '.[] | [ .module, .message ] | @tsv' | tr -s ' ' | (echo -e "Module\tMessage" && column -t)
+      - cat pylint_report.json | jq -r '.[] | [ .module, .message ] | @tsv' | sed 's/[[:space:]]\{2,\}/ /g' | (echo -e "Module\tMessage" && python -c "import sys, tabulate; print(tabulate.tabulate([line.strip().split('\t') for line in sys.stdin]))")
+      #- cat pylint_report.json | jq -r '.[] | [ .module, .message ] | @tsv' | tr -s ' ' | (echo -e "Module\tMessage" && column -t)
       #- cat pylint_report.json | jq -r '.[] | [ .module, .message ] | @tsv' | sed 's/[[:space:]]\{2,\}/ /g' | (echo -e "Module\tMessage" && column -t)
       #- cat pylint_report.json | jq -r '.[] | [ .module, .message ] | @tsv' | (echo -e "Module\tMessage" && column -t)
       #- cat pylint_report.json | jq
