@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': 'citus',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '${{ secrets.DB_HOST }}',
+        'HOST': 'autozonedb.cxqospjboyrv.eu-west-2.rds.amazonaws.com',
         'PORT': '5432',
         'OPTIONS': {
             'sslmode': 'require',
