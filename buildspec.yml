@@ -24,7 +24,7 @@ phases:
       - pylint --output-format=json --fail-under=0 $CODEBUILD_SRC_DIR/contacts/*.py $CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py > pylint_report.json || true
      # - pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
-      - cat pylint_report.json | jq -r '.[] | [ .module, .type, .message, .path ] | @tsv' | sed 's/[[:space:]]\{2,\}/ /g' | (echo -e "Module\tType\tMessage\tPath" && python -c "import sys, tabulate; print(tabulate.tabulate([line.strip().split('\t') for line in sys.stdin]))")
+      - cat pylint_report.json | jq -r '.[] | [ .module, .type, .message ] | @tsv' | sed 's/[[:space:]]\{2,\}/ /g' | (echo -e "Module\tType\tMessage" && python -c "import sys, tabulate; print(tabulate.tabulate([line.strip().split('\t') for line in sys.stdin]))")
       #- cat pylint_report.json | jq -r '.[] | [ .module, .message ] | @tsv' | sed 's/[[:space:]]\{2,\}/ /g' | (echo -e "Module\tMessage" && column -t)
       #- cat pylint_report.json | jq
       - echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD LOGS FOR STATIC CODE ANALYSIS'
