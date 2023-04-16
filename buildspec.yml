@@ -6,19 +6,18 @@ phases:
       python: 3.10
     commands:
       - echo "Installing dependencies"
-      - python3 -m venv env
+      #- python3 -m venv env
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check 
-      - pip install -r requirements.txt
+      #- pip install -r requirements.txt
+  
   pre_build:
     commands:
       - echo "Running Pylint static code analysis"
-      - pylint --output-format=json *.py > pylint_report.json
+      - pylint --output-format=json /codebuild/output/src617628837/src/*.py > pylint_report.json
       - pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
       - aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html
-
-      #s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/
       
   build:
     commands:
