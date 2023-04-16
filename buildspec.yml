@@ -35,11 +35,8 @@ phases:
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
       - pwd
-      - ls -la
-      - cd sonar-scanner-3.3.0.1492-linux/bin
-      - ls -la
       - export PATH=$PATH:/codebuild/output/src172087046/src/sonar-scanner-3.3.0.1492-linux/bin/
-      - ./codebuild/output/src172087046/src/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner \
+      - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner \
         -Dsonar.login=${sonartoken}
         -Dsonar.organization=x21171203-devsecops-code-security \
         -Dsonar.projectKey=DEVSECOPS \
