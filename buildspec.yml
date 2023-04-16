@@ -6,7 +6,7 @@ phases:
       python: 3.10
     commands:
       - echo "Installing dependencies"
-      #- python3 -m venv env
+      - python3 -m venv env
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check 
       #- pip install -r requirements.txt
