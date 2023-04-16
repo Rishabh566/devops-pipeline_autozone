@@ -21,9 +21,9 @@ phases:
       - pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
       - sudo apt-get install wget
-      - curl -o pylint_report.html <URL to the report>
+      #- curl -o pylint_report.html <URL to the report>
 
-      #- wget <URL to the report> -O pylint_report.html
+      - wget -O pylint_report.html <URL to the report>
       #$CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py
     
   build:
