@@ -11,7 +11,7 @@ phases:
       - pip install --upgrade pip --disable-pip-version-check 
       - pip install pylint==2.11.1
       - pip install pylint-json2html==0.4.0
-      #- pip install -r requirements.txt
+      - pip install -r requirements.txt
       - sudo apt-get install jq
       - sudo apt-get update
       #- sudo apt-get install -y bsdmainutils
