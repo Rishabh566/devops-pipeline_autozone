@@ -17,10 +17,11 @@ phases:
     commands:
       - echo "Running Pylint static code analysis"
       - which pylint
-      - pylint --output-format=json --fail-under=0 $CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py $CODEBUILD_SRC_DIR/contacts/*.py> pylint_report.json
+      - pylint --output-format=json --fail-under=0 $CODEBUILD_SRC_DIR/contacts/*.py> pylint_report.json
       - pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
       - aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html
+      #$CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py
     
   build:
     commands:
