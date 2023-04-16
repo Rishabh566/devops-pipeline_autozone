@@ -41,3 +41,5 @@ virtualenv==20.21.0
 virtualenv-clone==0.5.7
 wcwidth==0.1.9
 whitenoise==5.1.0
+pylint==2.11.1
+pylint-json2html==0.4.0
