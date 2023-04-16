@@ -28,13 +28,12 @@ phases:
       #- cat pylint_report.json | jq
       - echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD LOGS FOR STATIC CODE ANALYSIS'
       #- aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html --debug
-       
-      - wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
-      - tar xzf apache-maven-3.5.4-bin.tar.gz
-      - ln -s apache-maven-3.5.4 maven
+      
+      - echo "Installing sonarcloud Scanner" 
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
-      - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
+      - export PATH=$PATH:'pwd'/sonar-scanner-3.3.0.1492-linux/bin/
+
       - sonar-scanner \
         -Dsonar.login=${sonartoken}
         -Dsonar.organization=x21171203-devsecops-code-security \
