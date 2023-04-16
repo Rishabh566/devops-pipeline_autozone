@@ -16,8 +16,8 @@ phases:
     commands:
       - echo "Running Pylint static code analysis"
       - which pylint
-      - pylint --output-format=json /codebuild/output/src617628837/src/*.py > pylint_report.json
-      - pylint-json2html -f json -o pylint_report.html pylint_report.json
+      - /root/.pyenv/shims/pylint --output-format=json /codebuild/output/src617628837/src/*.py > pylint_report.json
+      - /root/.pyenv/shims/pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
       - aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html
       
