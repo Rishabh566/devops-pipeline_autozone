@@ -32,12 +32,15 @@ phases:
       #- aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html --debug
       
       - echo "Installing sonarcloud Scanner" 
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
-      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+      - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
       - pwd
-      - export PATH=$PATH:/codebuild/output/src172087046/src/sonar-scanner-3.3.0.1492-linux/bin/
-      - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner -Dsonar.login=${sonartoken} -Dsonar.organization=$(organisation) -Dsonar.projectName=x21171203-devsecops-code_security -Dsonar.sources=. -Dsonar.host.url=$(HOST) Dsonar.projectKey=$(Project) -DgeneratePom=true
-      - sleep 5
+      - export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
+      - sonar-scanner -Dsonar.login=f0c2b59b35aaa0c1259c020ffdc9b606ae0defa2 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=DEVSECOPS -Dsonar.organization=x21171203-devsecops-code_security -DgeneratePom=true
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=x22159401_inventory >result.json
+      - cat result.json
+      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
 
   build:
     commands:
