@@ -50,9 +50,9 @@ phases:
 
     commands:
       - mvn test     
-      - mvn sonar:sonar -Dsonar.login=${sonartoken} -Dsonar.host.url=${HOST} -Dsonar.projectKey=${Project} -Dsonar.organization=${organization}
+      - mvn sonar:sonar -Dsonar.login='77873b40cd286baffc78d1d7e2cc9dec2f1db328' -Dsonar.host.url='https://sonarcloud.io' -Dsonar.projectKey='DEVSECOPS' -Dsonar.organization='x21171203-devsecops-code_security'
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=${Project} >result.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=DEVSECOPS >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
 
