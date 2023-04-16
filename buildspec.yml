@@ -39,10 +39,10 @@ phases:
       - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner \
         -Dsonar.login=${sonartoken}
         -Dsonar.organization=x21171203-devsecops-code-security \
-        -Dsonar.projectKey="DEVSECOPS" \
+        -Dsonar.projectName=x21171203-devsecops-code_security \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
-        -Dsonar.projectName=x21171203-devsecops-code_security
+        
       - sleep 5
 
   build:
