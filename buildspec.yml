@@ -21,8 +21,8 @@ phases:
       - pylint --output-format=json --fail-under=0 $CODEBUILD_SRC_DIR/contacts/*.py $CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py > pylint_report.json || true
      # - pylint-json2html -f json -o pylint_report.html pylint_report.json
       - echo "Static code analysis report generated"
-      - jq -n --argjson data "$(cat pylint_report.json)" '$data[] | {type, module, message}'
-      - cat pylint_report.json | jq -r '.[] | {type, module, message}'
+      - cat pylint_report.json | jq -r '.[] | [ .type, .module, .message ] | @tsv' | column -t
+      #- cat pylint_report.json | jq
       - echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD LOGS FOR STATIC CODE ANALYSIS'
       #- aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html --debug
       # $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py
