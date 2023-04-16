@@ -35,6 +35,13 @@ phases:
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
       - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
+      - sonar-scanner \
+        -Dsonar.login=${sonartoken}
+        -Dsonar.organization=x21171203-devsecops-code-security \
+        -Dsonar.projectKey=DEVSECOPS \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=https://sonarcloud.io
+      - sleep 5
 
   build:
     commands:
@@ -44,12 +51,13 @@ phases:
       - python manage.py collectstatic --noinput
       #- echo "loading data from project_dump"
       #- python manage.py loaddata project_dump.json
-      - ls -la     
-      - mvn sonar:sonar -Dsonar.login=${sonartoken} -Dsonar.host.url=${HOST} -Dsonar.projectKey=${Project} -Dsonar.organization=${organization}
-      - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=${Project} >result.json
-      - cat result.json
-      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+
+      #- ls -la     
+      #- mvn sonar:sonar -Dsonar.login=${sonartoken} -Dsonar.host.url=${HOST} -Dsonar.projectKey=${Project} -Dsonar.organization=${organization}
+      #- sleep 5
+      #- curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=${Project} >result.json
+      #- cat result.json
+      #- if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
 
     commands:
       - echo Build completed on `date`
