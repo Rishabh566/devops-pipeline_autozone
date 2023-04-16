@@ -16,6 +16,8 @@ phases:
       - sudo apt-get update
       #- sudo apt-get install -y bsdmainutils
       - pip install tabulate
+      - sudo apt-get install bash-builtins
+
 
   pre_build:
     commands:
@@ -32,6 +34,8 @@ phases:
       - echo "Installing sonarcloud Scanner" 
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - pwd
+      - ls -la
       - export PATH=$PATH:'pwd'/sonar-scanner-3.3.0.1492-linux/bin/
       - . ~/.bashrc
 
