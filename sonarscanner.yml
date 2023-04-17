@@ -14,8 +14,9 @@ phases:
       - export SONAR_SCANNER_OPTS="-Xmx2g"
   build:
     commands:
+      - echo "Running SonarCloud Code Analysis"
       - sonar-scanner -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21 -Dsonar.sources=$CODEBUILD_SRC_DIR -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true -Dsonar.c.file.suffixes=- -Dsonar.cpp.file.suffixes=- -Dsonar.objc.file.suffixes=-
-      - sleep 5
+      - sleep 30
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=devsecopsautozone >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi

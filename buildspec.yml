@@ -35,15 +35,14 @@ phases:
         print(tabulate.tabulate([line.strip().split('\t') for line in
         sys.stdin]))")
       - >-
-        echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD
-        LOGS FOR STATIC CODE ANALYSIS'
+        echo 'This pre_build Stage is sucessful, please check build logs and sonarcloud terminal to view the analysis report'
   build:
     commands:
       - echo "Running Django migrations"
       - python manage.py migrate --traceback >/dev/null
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput  >/dev/null
-      - echo "Running CodeSecurity Analysis"
+      - echo "Build Stage Successful. Running CodeSecurity Analysis Using sonarcloud in next action phase "
 artifacts:
   files:
     - '**/*'
