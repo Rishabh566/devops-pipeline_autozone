@@ -20,11 +20,6 @@ phases:
       # - sudo apt-get install bash-builtins
       - sudo apt-get update >/dev/null
       - java --version
-      #- sudo apt install curl gnupg
-      #- curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-      #- sudo apt install nodejs
-      - node -v
-      - npm -v
 
   pre_build:
     commands:
