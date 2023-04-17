@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18.16
+      nodejs: 16
       java: corretto17
       python: 3.10
     commands:
