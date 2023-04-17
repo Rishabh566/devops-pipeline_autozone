@@ -1,0 +1,62 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+      java: corretto17
+      python: 3.10
+    commands:
+      - echo "Installing dependencies"
+      - python3 -m venv env >/dev/null
+      - chmod +x ./env/bin/activate >/dev/null
+      - pip install --upgrade pip --disable-pip-version-check >/dev/null
+      - pip install pylint==2.11.1 >/dev/null
+      - pip install pylint-json2html==0.4.0 >/dev/null
+      - pip install -r requirements.txt >/dev/null
+      - sudo apt-get install jq >/dev/null
+      #- sudo apt-get install -y bsdmainutils
+      - pip install tabulate >/dev/null
+      # - sudo apt-get install bash-builtins
+      - sudo apt-get update >/dev/null
+      - java --version
+
+  pre_build:
+    commands:
+      - echo "Running Pylint static code analysis"
+      - which pylint >/dev/null
+      - pylint --output-format=json --fail-under=0 $CODEBUILD_SRC_DIR/contacts/*.py $CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/accounts/*.py $CODEBUILD_SRC_DIR/autozone/*.py $CODEBUILD_SRC_DIR/cars/*.py > pylint_report.json || true
+      - pylint-json2html -f json -o pylint_report.html pylint_report.json >/dev/null
+      - echo "Static code analysis report generated"
+      - cat pylint_report.json | jq -r '.[] | [ .module, .type, .message ] | @tsv' | sed 's/[[:space:]]\{2,\}/ /g' | (echo -e "Module\tType\tMessage" && python -c "import sys, tabulate; print(tabulate.tabulate([line.strip().split('\t') for line in sys.stdin]))")
+      #- cat pylint_report.json | jq
+      - echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD LOGS FOR STATIC CODE ANALYSIS'
+      #- aws s3 cp pylint_report.html s3://codepipeline-eu-west-2-613623979028/x21171203-devsecops-/static-code-analysis/pylint_report.html --debug
+      
+      #- wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz >/dev/null
+      #- tar xzf apache-maven-3.5.4-bin.tar.gz >/dev/null
+      #- ln -s apache-maven-3.5.4 maven >/dev/null
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip >/dev/null
+      - unzip ./sonar-scanner-cli-4.8.0.2856-linux.zip >/dev/null
+      - export PATH=$PATH:/sonar-scanner-cli-4.8.0.2856-linux.zip/bin/ >/dev/null
+
+  build:
+    commands:
+      - echo "Running Django migrations" 
+      - python manage.py migrate --traceback >/dev/null
+      - echo "Collecting static files"
+      - python manage.py collectstatic --noinput  >/dev/null
+      - echo "Running CodeSecurity Analysis"    
+      - ./sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21 -Dsonar.organization=devsecopsautozone -Dsonar.projectKey=devsecopsautozone -Dsonar.sources=*.py -Dsonar.host.url=https://sonarcloud.io -DgeneratePom=true
+     # -  -Dsonar.sources=$CODEBUILD_SRC_DIR/contacts,$CODEBUILD_SRC_DIR/accounts,$CODEBUILD_SRC_DIR/autozone,$CODEBUILD_SRC_DIR/cars
+     # -Dsonar.sources=. 
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=devsecopsautozone >result.json
+      - cat result.json
+      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+
+artifacts:
+    files:
+      - '**/*'
+
+      #
