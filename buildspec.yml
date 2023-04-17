@@ -46,7 +46,7 @@ phases:
       - python manage.py collectstatic --noinput
       - sonar-scanner \
           -Dsonar.projectKey=devsecopsautozone \
-          -Dsonar.sources=. \
+          #-Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.token=08757a4d0fb1dbc93898fa08dfe71dfe32aea043   
 
