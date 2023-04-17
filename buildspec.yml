@@ -35,9 +35,9 @@ phases:
       #- wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz >/dev/null
       #- tar xzf apache-maven-3.5.4-bin.tar.gz >/dev/null
       #- ln -s apache-maven-3.5.4 maven >/dev/null
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip >/dev/null
-      - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip >/dev/null
-      - export PATH=$PATH:/sonar-scanner-cli-4.7.0.2747-linux.zip/bin/ >/dev/null
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip >/dev/null
+      - unzip ./sonar-scanner-cli-4.8.0.2856-linux.zip >/dev/null
+      - export PATH=$PATH:/sonar-scanner-cli-4.8.0.2856-linux.zip/bin/ >/dev/null
 
   build:
     commands:
@@ -46,7 +46,7 @@ phases:
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput  >/dev/null
       - echo "Running CodeSecurity Analysis"    
-      - ./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner Dsonar.login="4664f57ab1fafea7f3859310bce1fae7f8867d21" -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
+      - ./sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner Dsonar.login="4664f57ab1fafea7f3859310bce1fae7f8867d21" -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
      # -  -Dsonar.sources=$CODEBUILD_SRC_DIR/contacts,$CODEBUILD_SRC_DIR/accounts,$CODEBUILD_SRC_DIR/autozone,$CODEBUILD_SRC_DIR/cars
      # -Dsonar.sources=. 
       - sleep 5
