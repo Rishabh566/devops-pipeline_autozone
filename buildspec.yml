@@ -42,22 +42,11 @@ phases:
       - python manage.py migrate --traceback
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
-      - sonar-scanner -Dsonar.login=f0c2b59b35aaa0c1259c020ffdc9b606ae0defa2 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=DEVSECOPS -Dsonar.organization=x21171203-devsecops-code-security -DgeneratePom=true
+      - sonar-scanner -Dsonar.login=f0c2b59b35aaa0c1259c020ffdc9b606ae0defa2 -Dsonar.organization=x21171203-devsecops-code-security -Dsonar.projectKey=DEVSECOPS -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -DgeneratePom=true
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=DEVSECOPS >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
-      #- echo "loading data from project_dump"
-      #- python manage.py loaddata project_dump.json
-
-      #- ls -la     
-      #- mvn sonar:sonar -Dsonar.login=${sonartoken} -Dsonar.host.url=${HOST} -Dsonar.projectKey=${Project} -Dsonar.organization=${organization}
-      #- sleep 5
-      #- curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=${Project} >result.json
-      #- cat result.json
-      #- if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
-  post_build:    
-    commands:
       - echo Build completed on `date`
 
 artifacts:
