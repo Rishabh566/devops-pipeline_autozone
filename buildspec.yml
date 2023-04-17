@@ -17,7 +17,7 @@ phases:
       #- sudo apt-get install -y bsdmainutils
       - pip install tabulate
       - sudo apt-get install bash-builtins
-      - sudo apt-get install openjdk-8-jdk -y
+      - sudo apt install default-jre
 
 
   pre_build:
