@@ -14,16 +14,16 @@ phases:
   ###    - pip install pylint-json2html==0.4.0
       ###- pip install -r requirements.txt
       - sudo apt-get install jq
-      - sudo apt-get update
       #- sudo apt-get install -y bsdmainutils
    ###   - pip install tabulate
       - sudo apt-get install bash-builtins
       - java -version
-      - sudo apt-get remove oracle-java8-installer
-      - sudo add-apt-repository --remove ppa:webupd8team/java
-      - sudo apt install openjdk-11-jdk -y
-      - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-      - java --version
+     ### - sudo apt-get remove oracle-java8-installer
+     ### - sudo add-apt-repository --remove ppa:webupd8team/java
+     ### - sudo apt-get update
+     ### - sudo apt install openjdk-11-jdk -y
+     ### - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+     ### - java --version
 
 
 
