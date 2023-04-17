@@ -16,7 +16,7 @@ phases:
       - sudo apt-get install jq
       #- sudo apt-get install -y bsdmainutils
    ###   - pip install tabulate
-      - sudo apt-get install bash-builtins
+   #   - sudo apt-get install bash-builtins
       - java -version
      ### - sudo apt-get remove oracle-java8-installer
      ### - sudo add-apt-repository --remove ppa:webupd8team/java
