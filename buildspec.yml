@@ -19,6 +19,10 @@ phases:
       # - sudo apt-get install bash-builtins
       - sudo apt-get update >/dev/null
       - java --version
+      - curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+      - sudo yum install -y nodejs
+      - export PATH=/usr/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/opt/aws/bin:/opt/aws/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin/node:$PATH
+      - node -v
 
   pre_build:
     commands:
