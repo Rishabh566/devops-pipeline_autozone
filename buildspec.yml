@@ -17,7 +17,6 @@ phases:
       #- sudo apt-get install -y bsdmainutils
       - pip install tabulate
       - sudo apt-get install bash-builtins
-      - sudo apt install default-jre -y
 
 
   pre_build:
@@ -44,6 +43,8 @@ phases:
       - echo "Running Django migrations"
       - python manage.py migrate --traceback
       - echo "Collecting static files"
+      - sudo apt install default-jre -y
+      - java --version
       - python manage.py collectstatic --noinput     
       - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner -Dsonar.login=08757a4d0fb1dbc93898fa08dfe71dfe32aea043 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone
       - sleep 5
