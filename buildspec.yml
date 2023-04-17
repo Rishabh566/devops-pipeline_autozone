@@ -45,7 +45,11 @@ phases:
       - python manage.py migrate --traceback
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
-      - sonar-scanner -Dsonar.login=08757a4d0fb1dbc93898fa08dfe71dfe32aea043 -Dsonar.organization=devsecopsautozone Dsonar.projectKey=devsecopsautozone Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io
+      - sonar-scanner \
+          -Dsonar.projectKey=devsecopsautozone \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.token=08757a4d0fb1dbc93898fa08dfe71dfe32aea043   
 
 artifacts:
     files:
