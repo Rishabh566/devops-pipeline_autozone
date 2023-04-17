@@ -59,8 +59,12 @@ phases:
         -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21
         -Dsonar.organization=devsecopsautozone
         -Dsonar.projectKey=devsecopsautozone 
-        -Dsonar.projectBaseDir=$CODEBUILD_SRC_DIR
-        -Dsonar.host.url=https://sonarcloud.io -DgeneratePom=true -Dsonar.sourceEncoding=UTF-8
+        -Dsonar.sources=$CODEBUILD_SRC_DIR
+        -Dsonar.host.url=https://sonarcloud.io 
+        -DgeneratePom=true
+        -Dsonar.c.file.suffixes=- 
+        -Dsonar.cpp.file.suffixes=- 
+        -Dsonar.objc.file.suffixes=-
       - sleep 5
       - >-
         curl
