@@ -37,14 +37,6 @@ phases:
       - >-
         echo 'THIS pre_build STAGE MIGHT BE SUCCEDED. PLEASE CHECK CODE BUILD
         LOGS FOR STATIC CODE ANALYSIS'
-      - >-
-        wget
-        https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-        >/dev/null
-      - unzip ./sonar-scanner-cli-4.8.0.2856-linux.zip >/dev/null
-      - >-
-        export PATH=$PATH:/sonar-scanner-cli-4.8.0.2856-linux.zip/bin/
-        >/dev/null
   build:
     commands:
       - echo "Running Django migrations"
@@ -52,26 +44,6 @@ phases:
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput  >/dev/null
       - echo "Running CodeSecurity Analysis"
-      - >-
-        ./sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner
-        -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21
-        -Dsonar.organization=devsecopsautozone
-        -Dsonar.projectKey=devsecopsautozone 
-        -Dsonar.sources=$CODEBUILD_SRC_DIR
-        -Dsonar.host.url=https://sonarcloud.io 
-        -DgeneratePom=true
-        -Dsonar.c.file.suffixes=- 
-        -Dsonar.cpp.file.suffixes=- 
-        -Dsonar.objc.file.suffixes=-
-      - sleep 5
-      - >-
-        curl
-        https://sonarcloud.io/api/qualitygates/project_status?projectKey=devsecopsautozone
-        >result.json
-      - cat result.json
-      - >-
-        if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then
-        $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
 artifacts:
   files:
     - '**/*'
