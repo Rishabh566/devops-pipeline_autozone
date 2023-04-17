@@ -18,6 +18,7 @@ phases:
       #- sudo apt-get install -y bsdmainutils
       - pip install tabulate
       - sudo apt-get install bash-builtins
+      - sudo apt remove default-jdk default-jre -y
 
 
   pre_build:
