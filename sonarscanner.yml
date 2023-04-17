@@ -2,6 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
+      nodejs: 16
       python: 3.9
   pre_build:
     commands:
@@ -10,7 +11,7 @@ phases:
       - curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
       - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
       - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
-      - export SONAR_SCANNER_OPTS="-server"
+      - export SONAR_SCANNER_OPTS="-Xmx4g"
   build:
     commands:
       - sonar-scanner -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21 -Dsonar.sources=$CODEBUILD_SRC_DIR -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true -Dsonar.c.file.suffixes=- -Dsonar.cpp.file.suffixes=- -Dsonar.objc.file.suffixes=-
