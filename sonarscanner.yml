@@ -13,7 +13,7 @@ phases:
       - export SONAR_SCANNER_OPTS="-server"
   build:
     commands:
-      - sonar-scanner -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21 -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true -Dsonar.c.file.suffixes=- -Dsonar.cpp.file.suffixes=- -Dsonar.objc.file.suffixes=-
+      - sonar-scanner -Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21 -Dsonar.sources=$CODEBUILD_SRC_DIR -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true -Dsonar.c.file.suffixes=- -Dsonar.cpp.file.suffixes=- -Dsonar.objc.file.suffixes=-
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=devsecopsautozone >result.json
       - cat result.json
