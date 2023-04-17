@@ -45,7 +45,7 @@ phases:
       - python manage.py migrate --traceback
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput     
-      - sonar-scanner -Dsonar.login=08757a4d0fb1dbc93898fa08dfe71dfe32aea043 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
+      - ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner -Dsonar.login=08757a4d0fb1dbc93898fa08dfe71dfe32aea043 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=devsecopsautozone >result.json
       - cat result.json
