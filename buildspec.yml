@@ -47,7 +47,7 @@ phases:
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput  >/dev/null
       - echo "Running CodeSecurity Analysis"    
-      - ./sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner Dsonar.login="4664f57ab1fafea7f3859310bce1fae7f8867d21" -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
+      - ./sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner -X Dsonar.login=4664f57ab1fafea7f3859310bce1fae7f8867d21 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
      # -  -Dsonar.sources=$CODEBUILD_SRC_DIR/contacts,$CODEBUILD_SRC_DIR/accounts,$CODEBUILD_SRC_DIR/autozone,$CODEBUILD_SRC_DIR/cars
      # -Dsonar.sources=. 
       - sleep 5
