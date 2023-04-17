@@ -44,7 +44,8 @@ phases:
       - echo "Running Django migrations"
       - python manage.py migrate --traceback
       - echo "Collecting static files"
-      - python manage.py collectstatic --noinput      
+      - python manage.py collectstatic --noinput
+      - mvn clean install -e -X      
       - mvn clean verify sonar:sonar -Dsonar.login=08757a4d0fb1dbc93898fa08dfe71dfe32aea043 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=devsecopsautozone -Dsonar.organization=devsecopsautozone -DgeneratePom=true
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=devsecopsautozone >result.json
