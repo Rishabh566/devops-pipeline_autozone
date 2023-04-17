@@ -4,7 +4,7 @@ phases:
     runtime-versions:
       nodejs: 16
       java: corretto17
-      python: 3.1
+      python: 3.10
     commands:
       - echo "Installing dependencies"
       - python3 -m venv env >/dev/null
