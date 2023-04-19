@@ -34,6 +34,7 @@ class Car(models.Model):
 		  ('Westmeath','Westmeath'),
 		  ('Wexford','Wexford'),
 		  ('Wicklow','Wicklow'),
+		  ('Dublin2','Dublin2'),
 	 )
 
 	year_choice=[]
